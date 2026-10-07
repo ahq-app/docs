@@ -1,0 +1,139 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AHQ advanced-settings.json",
+  "description": "AHQ の advanced-settings.json（上級者向けオプション）のスキーマです。設定画面からは変更できない値をこのファイルで設定できますが、設定値による不具合はサポート対象外です。",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "エディタにこのスキーマの場所を伝えるためのキー"
+    },
+    "sound": {
+      "type": "object",
+      "description": "通知音に関する設定",
+      "additionalProperties": false,
+      "properties": {
+        "debounceMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 60000,
+          "default": 3000,
+          "description": "一定時間内の連続した通知に対して音を鳴らさないようにするためのしきい値（ms）"
+        }
+      }
+    },
+    "nudge": {
+      "type": "object",
+      "description": "Nudge（アクション付き通知）に関する設定",
+      "additionalProperties": false,
+      "properties": {
+        "timeoutSec": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 600,
+          "default": 10,
+          "description": "Nudge が自動で消えるまでの秒数（小数可）"
+        }
+      }
+    },
+    "sidePeek": {
+      "type": "object",
+      "description": "サイドピークの幅に関する設定。値は px（\"320px\" / 数値）またはウィンドウ幅に対する割合（\"50%\"）",
+      "additionalProperties": false,
+      "properties": {
+        "minWidth": {
+          "oneOf": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "string",
+              "pattern": "^\\s*\\d+(\\.\\d+)?(px|%)?\\s*$"
+            }
+          ],
+          "default": "360px",
+          "description": "狭められる最低幅"
+        },
+        "openWidth": {
+          "oneOf": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "string",
+              "pattern": "^\\s*\\d+(\\.\\d+)?(px|%)?\\s*$"
+            }
+          ],
+          "default": "560px",
+          "description": "開くときの初期幅"
+        },
+        "maxWidth": {
+          "oneOf": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "string",
+              "pattern": "^\\s*\\d+(\\.\\d+)?(px|%)?\\s*$"
+            }
+          ],
+          "default": "60%",
+          "description": "広げられる最大幅"
+        }
+      }
+    },
+    "tab": {
+      "type": "object",
+      "description": "横タブに関する設定",
+      "additionalProperties": false,
+      "properties": {
+        "maxWidth": {
+          "oneOf": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "string",
+              "pattern": "^\\s*\\d+(\\.\\d+)?(px)?\\s*$"
+            }
+          ],
+          "default": "120px",
+          "description": "タブラベルの最大幅（px のみ）"
+        }
+      }
+    },
+    "forge": {
+      "type": "object",
+      "description": "Pull Request の新着確認（ポーリング）に関する設定",
+      "additionalProperties": false,
+      "properties": {
+        "activePollSec": {
+          "type": "integer",
+          "minimum": 30,
+          "maximum": 86400,
+          "default": 300,
+          "description": "表示中の Project の確認間隔（秒）"
+        },
+        "inactivePollSec": {
+          "type": "integer",
+          "minimum": 30,
+          "maximum": 86400,
+          "default": 1800,
+          "description": "表示中以外の Project の確認間隔（秒）"
+        },
+        "switchMinGapSec": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 86400,
+          "default": 60,
+          "description": "Project 切り替え時の確認を、直近でこの秒数以内に確認済みなら省略する（0 で常に確認）"
+        }
+      }
+    }
+  }
+}
