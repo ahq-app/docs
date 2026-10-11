@@ -1,6 +1,6 @@
 # docs
 
-[AHQ](https://github.com/ahq-app/ahq) のドキュメントと JSON Schema を公開するためのリポジトリです。GitHub Pages で `https://ahq-app.github.io/docs/` として公開されます。
+[AHQ](https://github.com/ahq-app/ahq) のドキュメントと JSON Schema を公開するためのリポジトリです。
 
 ## JSON Schema
 
