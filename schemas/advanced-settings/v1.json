@@ -4,6 +4,17 @@
   "description": "AHQ の advanced-settings.json（上級者向けオプション）のスキーマです。設定画面からは変更できない値をこのファイルで設定できますが、設定値による不具合はサポート対象外です。",
   "type": "object",
   "additionalProperties": false,
+  "definitions": {
+    "forgeHostList": {
+      "type": "array",
+      "description": "ホスト名の配列（スキーム・ポート・パスは付けない）",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?(\\.[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?)*$"
+      }
+    }
+  },
   "properties": {
     "$schema": {
       "type": "string",
@@ -132,6 +143,16 @@
           "maximum": 86400,
           "default": 60,
           "description": "Project 切り替え時の確認を、直近でこの秒数以内に確認済みなら省略する（0 で常に確認）"
+        },
+        "hosts": {
+          "type": "object",
+          "description": "自己ホスト型の Git ホスティングサービスを、種類ごとにホスト名で登録する。github.com と gitlab.com は書かなくても使える",
+          "additionalProperties": false,
+          "properties": {
+            "github": { "$ref": "#/definitions/forgeHostList" },
+            "gitlab": { "$ref": "#/definitions/forgeHostList" }
+          },
+          "default": {}
         }
       }
     }
