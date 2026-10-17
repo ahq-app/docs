@@ -155,6 +155,20 @@
           "default": {}
         }
       }
+    },
+    "navigation": {
+      "type": "object",
+      "description": "戻る/進むボタン（ヘッダー、Pull Request / Issue の Side Peek）に関する設定",
+      "additionalProperties": false,
+      "properties": {
+        "historyLimit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000,
+          "default": 50,
+          "description": "戻る/進むの履歴に残す件数。超えた分は古いものから消える。履歴は再起動で消える。Side Peek の履歴は、Peek を閉じても消える"
+        }
+      }
     }
   }
 }
